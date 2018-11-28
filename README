@@ -1,5 +1,7 @@
 # EricScript Readme v2.1.1 (Nov 2018)
-# Please feel free to email the author if you have any questions or issues.
+# *** This software has been modified from its original version. It has been updated to run with the latest version of Samtools and a Dockerfile for containerizing the software has been included (November 27, 2018). ***
+#
+# Please feel free to email the original author if you have any questions or issues.
 # matteo.benelli AT gmail.com
 
 #########################
