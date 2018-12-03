@@ -154,7 +154,7 @@ fi
 cat $outputfolder/aln/tmp.sam | $ericscriptfolder/lib/perl/xa2multi.pl > $outputfolder/aln/$samplename.remap.sam
 fi
 samtools view -@ $nthreads -bS -o $outputfolder/aln/$samplename.remap.bam $outputfolder/aln/$samplename.remap.sam 1>> $outputfolder/out/.ericscript.log 2>> $outputfolder/out/.ericscript.log
-samtools sort -@ $nthreads $outputfolder/aln/$samplename.remap.bam -o $outputfolder/aln/$samplename.remap.sorted.bam 1>> $outputfolder/out/.ericscript.log 2>> $outputfolder/out/.ericscript.log
+samtools sort -@ $nthreads -o $outputfolder/aln/$samplename.remap.sorted.bam $outputfolder/aln/$samplename.remap.bam 1>> $outputfolder/out/.ericscript.log 2>> $outputfolder/out/.ericscript.log
 samtools index $outputfolder/aln/$samplename.remap.sorted.bam 1>> $outputfolder/out/.ericscript.log
 else
 printf "[EricScript] Aligning to exon junction reference ... \n"
@@ -177,7 +177,7 @@ bwa mem -Y -t $nthreads $mynewref $reads_1 $reads_2 | $ericscriptfolder/lib/perl
 fi
 fi
 samtools view -@ $nthreads -bS -o $outputfolder/aln/$samplename.remap.bam $outputfolder/aln/$samplename.remap.sam
-samtools sort -@ $nthreads $outputfolder/aln/$samplename.remap.bam -o $outputfolder/aln/$samplename.remap.sorted.bam
+samtools sort -@ $nthreads -o $outputfolder/aln/$samplename.remap.sorted.bam $outputfolder/aln/$samplename.remap.bam
 samtools index $outputfolder/aln/$samplename.remap.sorted.bam
 fi
 printf "done. \n"
@@ -199,7 +199,7 @@ bwa mem -Y -t $nthreads $mynewref_recal $reads_1 $reads_2 > $outputfolder/aln/tm
 fi
 cat $outputfolder/aln/tmp.sam | $ericscriptfolder/lib/perl/xa2multi.pl > $outputfolder/aln/$samplename.remap.recal.sam
 samtools view -@ $nthreads -bt $mynewref_recal -o $outputfolder/aln/$samplename.remap.recal.bam $outputfolder/aln/$samplename.remap.recal.sam 1>> $outputfolder/out/.ericscript.log 2>> $outputfolder/out/.ericscript.log
-samtools sort -@ $nthreads $outputfolder/aln/$samplename.remap.recal.bam -o $outputfolder/aln/$samplename.remap.recal.sorted.bam 1>> $outputfolder/out/.ericscript.log 2>> $outputfolder/out/.ericscript.log
+samtools sort -@ $nthreads -o $outputfolder/aln/$samplename.remap.recal.sorted.bam $outputfolder/aln/$samplename.remap.recal.bam 1>> $outputfolder/out/.ericscript.log 2>> $outputfolder/out/.ericscript.log
 samtools rmdup $outputfolder/aln/$samplename.remap.recal.sorted.bam $outputfolder/aln/$samplename.remap.recal.sorted.rmdup.bam 1>> $outputfolder/out/.ericscript.log 2>> $outputfolder/out/.ericscript.log
 samtools index $outputfolder/aln/$samplename.remap.recal.sorted.rmdup.bam 1>> $outputfolder/out/.ericscript.log 
 samtools view -@ $nthreads -b -h -q 1 $outputfolder/aln/$samplename.remap.recal.sorted.rmdup.bam > $outputfolder/aln/$samplename.remap.recal.sorted.rmdup.q1.bam
@@ -215,7 +215,7 @@ else
 bwa mem -Y -t $nthreads $mynewref_recal $reads_1 $reads_2 | $ericscriptfolder/lib/perl/xa2multi.pl > $outputfolder/aln/$samplename.remap.recal.sam
 fi
 samtools view -@ $nthreads -bt $mynewref_recal -o $outputfolder/aln/$samplename.remap.recal.bam $outputfolder/aln/$samplename.remap.recal.sam 
-samtools sort -@ $nthreads $outputfolder/aln/$samplename.remap.recal.bam -o $outputfolder/aln/$samplename.remap.recal.sorted.bam
+samtools sort -@ $nthreads -o $outputfolder/aln/$samplename.remap.recal.sorted.bam $outputfolder/aln/$samplename.remap.recal.bam
 samtools rmdup $outputfolder/aln/$samplename.remap.recal.sorted.bam $outputfolder/aln/$samplename.remap.recal.sorted.rmdup.bam 
 samtools index $outputfolder/aln/$samplename.remap.recal.sorted.rmdup.bam 
 samtools view -@ $nthreads -b -h -q 1 $outputfolder/aln/$samplename.remap.recal.sorted.rmdup.bam > $outputfolder/aln/$samplename.remap.recal.sorted.rmdup.q1.bam
